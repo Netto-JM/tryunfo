@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Input from './Input';
 
-/* um campo do tipo number que contenha o atributo data-testid="attr1-input". Este campo será usado para inserir o primeiro atributo da carta. Ele é livre para você adicionar o atributo que mais combinar com o seu baralho.
+/* um campo do tipo select que contenha o atributo data-testid="rare-input". Este campo será usado para inserir a raridade da carta e deverá ter as options: normal, raro e muito raro (é importante que as opções estejam nessa ordem).
 
-um campo do tipo number que contenha o atributo data-testid="attr2-input". Este campo será usado para inserir o segundo atributo da carta. Ele é livre para você adicionar o atributo que mais combinar com o seu baralho.
+um campo do tipo checkbox que contenha o atributo data-testid="trunfo-input". Este campo será usado para inserir se a carta é o Super Trunfo.
 
-um campo do tipo number que contenha o atributo data-testid="attr3-input". Este campo será usado para inserir o terceiro atributo da carta. Ele é livre para você adicionar o atributo que mais combinar com o seu baralho.
-
-um campo do tipo text que contenha o atributo data-testid="image-input". Este campo será usado para inserir o caminho para imagem da carta. */
+um buttonque contenha o atributo data-testid="save-button" e que tenha o texto "Salvar". */
 
 class Form extends Component {
   render() {
@@ -53,6 +51,14 @@ class Form extends Component {
           type="text"
           testid="image-input"
         />
+        <label htmlFor="rarity">
+          <span>Raridade</span>
+          <select name="rarity" id="rarity" data-testid="rare-input">
+            <option value="normal">Normal</option>
+            <option value="raro">Raro</option>
+            <option value="muito raro">Muito Raro</option>
+          </select>
+        </label>
       </form>
     );
   }
