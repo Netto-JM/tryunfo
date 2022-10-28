@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import Input from './Input';
 
-/* um campo do tipo select que contenha o atributo data-testid="rare-input". Este campo será usado para inserir a raridade da carta e deverá ter as options: normal, raro e muito raro (é importante que as opções estejam nessa ordem).
-
-um campo do tipo checkbox que contenha o atributo data-testid="trunfo-input". Este campo será usado para inserir se a carta é o Super Trunfo.
-
-um buttonque contenha o atributo data-testid="save-button" e que tenha o texto "Salvar". */
-
 class Form extends Component {
   render() {
     return (
@@ -66,8 +60,9 @@ class Form extends Component {
             id="trunfo"
             data-testid="trunfo-input"
           />
-          <span>Super Tryne Trunfo</span>
+          <span>Super Trybe Trunfo</span>
         </label>
+        <button data-testid="save-button" type="submit">Salvar</button>
       </form>
     );
   }
