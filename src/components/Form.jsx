@@ -29,6 +29,30 @@ class Form extends Component {
             data-testid="description-input"
           />
         </label>
+        <Input
+          labelFor="attr1"
+          labelText="Attr01"
+          type="number"
+          testid="attr1-input"
+        />
+        <Input
+          labelFor="attr2"
+          labelText="Attr02"
+          type="number"
+          testid="attr2-input"
+        />
+        <Input
+          labelFor="attr3"
+          labelText="Attr03"
+          type="number"
+          testid="attr3-input"
+        />
+        <Input
+          labelFor="card-image"
+          labelText="Imagem"
+          type="text"
+          testid="image-input"
+        />
       </form>
     );
   }
