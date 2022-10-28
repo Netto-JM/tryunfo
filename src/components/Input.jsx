@@ -7,7 +7,7 @@ class Input extends Component {
     return (
       <label htmlFor={ labelFor }>
         <span>{ labelText }</span>
-        <input type={ type } data-testid={ testid } id={ labelFor } />
+        <input type={ type } data-testid={ testid } id={ labelFor } name={ labelFor } />
       </label>
     );
   }
