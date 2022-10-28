@@ -59,6 +59,15 @@ class Form extends Component {
             <option value="muito raro">Muito Raro</option>
           </select>
         </label>
+        <label htmlFor="trunfo">
+          <input
+            type="checkbox"
+            name="trunfo"
+            id="trunfo"
+            data-testid="trunfo-input"
+          />
+          <span>Super Tryne Trunfo</span>
+        </label>
       </form>
     );
   }
