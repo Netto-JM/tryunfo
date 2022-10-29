@@ -66,7 +66,7 @@ class Form extends Component {
           testid="attr3-input"
         />
         <Input
-          labelFor="card-image"
+          labelFor="image"
           labelText="Imagem"
           type="text"
           value={ cardImage }
