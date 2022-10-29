@@ -17,9 +17,8 @@ class App extends React.Component {
   }
 
   onInputChange = ({ target }) => {
-    const { name, type } = target;
-    let { value } = target;
-    if (type === 'checkbox') value = target.checked;
+    const { name, type, checked } = target;
+    const value = (type === 'checkbox') ? checked : target.value;
     this.setState({
       [name]: value,
     });
