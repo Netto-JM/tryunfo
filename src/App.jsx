@@ -11,17 +11,22 @@ class App extends React.Component {
       attr1: '',
       attr2: '',
       attr3: '',
+      rarity: 'normal',
+      trunfo: false,
     };
   }
 
-  onInputChange = ({ target: { name, value } }) => {
+  onInputChange = ({ target }) => {
+    const { name, type } = target;
+    let { value } = target;
+    if (type === 'checkbox') value = target.checked;
     this.setState({
       [name]: value,
     });
   };
 
   render() {
-    const { name, description, attr1, attr2, attr3 } = this.state;
+    const { name, description, attr1, attr2, attr3, rarity, trunfo } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -32,6 +37,8 @@ class App extends React.Component {
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
+          cardRare={ rarity }
+          cardTrunfo={ trunfo }
         />
         <Card
           cardName={ name }
@@ -39,6 +46,8 @@ class App extends React.Component {
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
+          cardRare={ rarity }
+          cardTrunfo={ trunfo }
         />
       </div>
     );
