@@ -11,21 +11,52 @@ class App extends React.Component {
       attr1: '',
       attr2: '',
       attr3: '',
+      image: '',
       rarity: 'normal',
       trunfo: false,
+      isSaveButtonDisabled: true,
     };
   }
+
+  validateForm = () => {
+    const {
+      name,
+      description,
+      attr1,
+      attr2,
+      attr3,
+      image,
+      rarity,
+      trunfo,
+      isSaveButtonDisabled,
+    } = this.state;
+    const isNotEmpty = !!(name && description && image);
+    const isValidForm = [isNotEmpty].every((bool) => bool);
+    this.setState({
+      isSaveButtonDisabled: !(isValidForm),
+    });
+  };
 
   onInputChange = ({ target }) => {
     const { name, type, checked } = target;
     const value = (type === 'checkbox') ? checked : target.value;
     this.setState({
       [name]: value,
-    });
+    }, this.validateForm);
   };
 
   render() {
-    const { name, description, attr1, attr2, attr3, rarity, trunfo } = this.state;
+    const {
+      name,
+      description,
+      attr1,
+      attr2,
+      attr3,
+      image,
+      rarity,
+      trunfo,
+      isSaveButtonDisabled,
+    } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -36,8 +67,10 @@ class App extends React.Component {
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
+          cardImage={ image }
           cardRare={ rarity }
           cardTrunfo={ trunfo }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
         />
         <Card
           cardName={ name }
