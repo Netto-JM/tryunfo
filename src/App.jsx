@@ -8,9 +8,9 @@ class App extends React.Component {
     this.state = {
       name: '',
       description: '',
-      attr1: '',
-      attr2: '',
-      attr3: '',
+      attr1: 0,
+      attr2: 0,
+      attr3: 0,
       image: '',
       rarity: 'normal',
       trunfo: false,
@@ -52,6 +52,21 @@ class App extends React.Component {
     }, this.validateForm);
   };
 
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    this.setState({
+      name: '',
+      description: '',
+      attr1: 0,
+      attr2: 0,
+      attr3: 0,
+      image: '',
+      rarity: 'normal',
+      trunfo: false,
+      isSaveButtonDisabled: true,
+    });
+  };
+
   render() {
     const {
       name,
@@ -78,6 +93,7 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ name }
