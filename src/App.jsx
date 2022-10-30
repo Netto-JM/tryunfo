@@ -18,6 +18,15 @@ class App extends React.Component {
     };
   }
 
+  validateAttributes = (attr1, attr2, attr3) => {
+    const MAXTOTAL = 210;
+    const MAXATTR = 90;
+    if (attr1 + attr2 + attr3 > MAXTOTAL) return false;
+    const biggestAttr = Math.max(attr1, attr2, attr3);
+    const smallestAttr = Math.min(attr1, attr2, attr3);
+    return !(biggestAttr > MAXATTR || smallestAttr < 0);
+  };
+
   validateForm = () => {
     const {
       name,
@@ -26,12 +35,12 @@ class App extends React.Component {
       attr2,
       attr3,
       image,
-      rarity,
-      trunfo,
-      isSaveButtonDisabled,
     } = this.state;
     const isNotEmpty = !!(name && description && image);
-    const isValidForm = [isNotEmpty].every((bool) => bool);
+    const isValidAttrs = this.validateAttributes(+attr1, +attr2, +attr3);
+    const isValidForm = isNotEmpty && isValidAttrs;
+    console.log(isValidAttrs);
+    console.log(isValidForm);
     this.setState({
       isSaveButtonDisabled: !(isValidForm),
     });
