@@ -24,7 +24,7 @@ class App extends React.Component {
     if (attr1 + attr2 + attr3 > MAXTOTAL) return false;
     const biggestAttr = Math.max(attr1, attr2, attr3);
     const smallestAttr = Math.min(attr1, attr2, attr3);
-    return !(biggestAttr > MAXATTR || smallestAttr < 0);
+    return biggestAttr <= MAXATTR && smallestAttr >= 0;
   };
 
   validateForm = () => {
