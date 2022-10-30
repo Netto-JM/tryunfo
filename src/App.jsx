@@ -39,8 +39,6 @@ class App extends React.Component {
     const isNotEmpty = !!(name && description && image);
     const isValidAttrs = this.validateAttributes(+attr1, +attr2, +attr3);
     const isValidForm = isNotEmpty && isValidAttrs;
-    console.log(isValidAttrs);
-    console.log(isValidForm);
     this.setState({
       isSaveButtonDisabled: !(isValidForm),
     });
