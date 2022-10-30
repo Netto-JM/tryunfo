@@ -52,8 +52,7 @@ class App extends React.Component {
     }, this.validateForm);
   };
 
-  onSaveButtonClick = (event) => {
-    event.preventDefault();
+  resetState = () => {
     this.setState({
       name: '',
       description: '',
@@ -65,6 +64,16 @@ class App extends React.Component {
       trunfo: false,
       isSaveButtonDisabled: true,
     });
+  };
+
+  saveCard = () => {
+    // code for saving card in an object and add it to the state, create the state for storing cards
+  };
+
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    this.saveCard();
+    this.resetState();
   };
 
   render() {
