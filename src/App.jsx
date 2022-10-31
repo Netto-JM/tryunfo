@@ -70,9 +70,7 @@ class App extends React.Component {
   };
 
   setHasTrunfo = () => {
-    this.setState({
-      hasTrunfo: true,
-    });
+    this.setState({ hasTrunfo: true });
   };
 
   saveCard = () => {
@@ -107,6 +105,20 @@ class App extends React.Component {
     event.preventDefault();
     this.saveCard();
     this.resetState();
+  };
+
+  deckFilter = (card, removedCard) => {
+    const name = card.name !== removedCard.name;
+    const description = card.description !== removedCard.description;
+    const image = card.image !== removedCard.image;
+    return name || description || image;
+  };
+
+  onDeleteButtonClick = (removedCard) => {
+    const { deck } = this.state;
+    const filteredDeck = deck.filter((card) => this.deckFilter(card, removedCard));
+    this.setState({ deck: filteredDeck });
+    if (removedCard.trunfo) this.setState({ hasTrunfo: false });
   };
 
   render() {
@@ -149,7 +161,7 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
         />
-        <Deck deck={ deck } />
+        <Deck deck={ deck } onDeleteButtonClick={ this.onDeleteButtonClick } />
       </div>
     );
   }
