@@ -63,6 +63,7 @@ class App extends React.Component {
       attr3: 0,
       image: '',
       rarity: 'normal',
+      trunfo: false,
       isSaveButtonDisabled: true,
     });
   };
@@ -117,6 +118,7 @@ class App extends React.Component {
       image,
       rarity,
       trunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
     return (
@@ -132,6 +134,7 @@ class App extends React.Component {
           cardImage={ image }
           cardRare={ rarity }
           cardTrunfo={ trunfo }
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
