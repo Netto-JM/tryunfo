@@ -14,7 +14,9 @@ class App extends React.Component {
       image: '',
       rarity: 'normal',
       trunfo: false,
+      hasTrunfo: false,
       isSaveButtonDisabled: true,
+      deck: [],
     };
   }
 
@@ -61,13 +63,42 @@ class App extends React.Component {
       attr3: 0,
       image: '',
       rarity: 'normal',
-      trunfo: false,
       isSaveButtonDisabled: true,
     });
   };
 
+  setHasTrunfo = () => {
+    this.setState({
+      hasTrunfo: true,
+    });
+  };
+
   saveCard = () => {
-    // code for saving card in an object and add it to the state, create the state for storing cards
+    const {
+      name,
+      description,
+      image,
+      rarity,
+      trunfo,
+      hasTrunfo,
+      attr1,
+      attr2,
+      attr3,
+    } = this.state;
+    if (trunfo && !hasTrunfo) this.setHasTrunfo();
+    const newCard = {
+      name,
+      description,
+      image,
+      rarity,
+      trunfo,
+      attr1,
+      attr2,
+      attr3,
+    };
+    this.setState((prevState) => ({
+      deck: [...prevState.deck, newCard],
+    }));
   };
 
   onSaveButtonClick = (event) => {
