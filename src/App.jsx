@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './components/Card';
+import Deck from './components/Deck';
 import Form from './components/Form';
 
 class App extends React.Component {
@@ -120,6 +121,7 @@ class App extends React.Component {
       trunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      deck,
     } = this.state;
     return (
       <div>
@@ -147,6 +149,7 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
         />
+        <Deck deck={ deck } />
       </div>
     );
   }
