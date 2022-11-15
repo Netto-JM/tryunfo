@@ -8,6 +8,7 @@ class Form extends Component {
       cardName,
       cardDescription,
       nameFilter,
+      rarityFilter,
       cardAttr1,
       cardAttr2,
       cardAttr3,
@@ -96,6 +97,21 @@ class Form extends Component {
             <option value="muito raro">Muito Raro</option>
           </select>
         </label>
+        <label htmlFor="rarityFilter">
+          <span>Filtrar por Raridade</span>
+          <select
+            name="rarityFilter"
+            id="rarityFilter"
+            value={ rarityFilter }
+            onChange={ onInputChange }
+            data-testid="rare-filter"
+          >
+            <option value="todas">Todas</option>
+            <option value="normal">Normal</option>
+            <option value="raro">Raro</option>
+            <option value="muito raro">Muito Raro</option>
+          </select>
+        </label>
         {hasTrunfo ? (
           <p>Você já tem um Super Trunfo em seu baralho</p>
         ) : (
@@ -128,6 +144,7 @@ Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
   nameFilter: PropTypes.string.isRequired,
+  rarityFilter: PropTypes.string.isRequired,
   cardAttr1: PropTypes.string.isRequired,
   cardAttr2: PropTypes.string.isRequired,
   cardAttr3: PropTypes.string.isRequired,

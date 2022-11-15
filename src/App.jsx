@@ -10,6 +10,7 @@ class App extends React.Component {
       name: '',
       description: '',
       nameFilter: '',
+      rarityFilter: 'todas',
       attr1: 0,
       attr2: 0,
       attr3: 0,
@@ -32,7 +33,21 @@ class App extends React.Component {
     return biggestAttr <= MAXATTR && smallestAttr >= 0;
   };
 
+  filterDeck = () => {
+    this.setState((prevState) => {
+      const noFilter = prevState.rarityFilter === 'todas';
+      const rarityFilter = (card) => noFilter || card.rarity === prevState.rarityFilter;
+      let filteredDeck = prevState.deck.filter(rarityFilter);
+      if (prevState.nameFilter) {
+        const nameFilter = (card) => card.name.includes(prevState.nameFilter);
+        filteredDeck = filteredDeck.filter(nameFilter);
+      }
+      return { filteredDeck };
+    });
+  };
+
   validateForm = () => {
+    console.log('validateForm');
     const {
       name,
       description,
@@ -47,17 +62,7 @@ class App extends React.Component {
     this.setState({
       isSaveButtonDisabled: !(isValidForm),
     });
-  };
-
-  filterDeck = (name) => {
-    if (name === 'nameFilter') {
-      console.log('using');
-      this.setState((prevState) => {
-        const deckFilter = (card) => card.name.includes(prevState.nameFilter);
-        const filteredDeck = prevState.deck.filter(deckFilter);
-        return { filteredDeck };
-      });
-    }
+    this.filterDeck();
   };
 
   onInputChange = ({ target }) => {
@@ -68,7 +73,6 @@ class App extends React.Component {
         [name]: value,
       },
       this.validateForm,
-      this.filterDeck(name),
     );
   };
 
@@ -122,6 +126,7 @@ class App extends React.Component {
     event.preventDefault();
     this.saveCard();
     this.resetState();
+    this.filterDeck();
   };
 
   deckFilter = (card, removedCard) => {
@@ -136,18 +141,20 @@ class App extends React.Component {
     const filteredDeck = deck.filter((card) => this.deckFilter(card, removedCard));
     this.setState({ deck: filteredDeck });
     if (removedCard.trunfo) this.setState({ hasTrunfo: false });
+    this.filterDeck();
   };
 
-  isFilteredDeck = () => {
-    const { nameFilter } = this.state;
-    return nameFilter;
-  };
+  // isFilteredDeck = () => {
+  //   const { nameFilter, rarityFilter } = this.state;
+  //   return nameFilter || rarityFilter !== 'todas';
+  // };
 
   render() {
     const {
       name,
       description,
       nameFilter,
+      rarityFilter,
       attr1,
       attr2,
       attr3,
@@ -156,11 +163,11 @@ class App extends React.Component {
       trunfo,
       hasTrunfo,
       isSaveButtonDisabled,
-      deck,
+      // deck,
       filteredDeck,
     } = this.state;
 
-    const deckToRender = this.isFilteredDeck() ? filteredDeck : deck;
+    // const deckToRender = this.isFilteredDeck() ? filteredDeck : deck;
 
     return (
       <div>
@@ -170,6 +177,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           cardDescription={ description }
           nameFilter={ nameFilter }
+          rarityFilter={ rarityFilter }
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
@@ -189,7 +197,7 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
         />
-        <Deck deck={ deckToRender } onDeleteButtonClick={ this.onDeleteButtonClick } />
+        <Deck deck={ filteredDeck } onDeleteButtonClick={ this.onDeleteButtonClick } />
       </div>
     );
   }
