@@ -9,6 +9,7 @@ class App extends React.Component {
     this.state = {
       name: '',
       description: '',
+      nameFilter: '',
       attr1: 0,
       attr2: 0,
       attr3: 0,
@@ -18,6 +19,7 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       deck: [],
+      filteredDeck: [],
     };
   }
 
@@ -47,12 +49,27 @@ class App extends React.Component {
     });
   };
 
+  filterDeck = (name) => {
+    if (name === 'nameFilter') {
+      console.log('using');
+      this.setState((prevState) => {
+        const deckFilter = (card) => card.name.includes(prevState.nameFilter);
+        const filteredDeck = prevState.deck.filter(deckFilter);
+        return { filteredDeck };
+      });
+    }
+  };
+
   onInputChange = ({ target }) => {
     const { name, type, checked } = target;
     const value = (type === 'checkbox') ? checked : target.value;
-    this.setState({
-      [name]: value,
-    }, this.validateForm);
+    this.setState(
+      {
+        [name]: value,
+      },
+      this.validateForm,
+      this.filterDeck(name),
+    );
   };
 
   resetState = () => {
@@ -121,10 +138,16 @@ class App extends React.Component {
     if (removedCard.trunfo) this.setState({ hasTrunfo: false });
   };
 
+  isFilteredDeck = () => {
+    const { nameFilter } = this.state;
+    return nameFilter;
+  };
+
   render() {
     const {
       name,
       description,
+      nameFilter,
       attr1,
       attr2,
       attr3,
@@ -134,7 +157,11 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       deck,
+      filteredDeck,
     } = this.state;
+
+    const deckToRender = this.isFilteredDeck() ? filteredDeck : deck;
+
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -142,6 +169,7 @@ class App extends React.Component {
           cardName={ name }
           onInputChange={ this.onInputChange }
           cardDescription={ description }
+          nameFilter={ nameFilter }
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
@@ -161,7 +189,7 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
         />
-        <Deck deck={ deck } onDeleteButtonClick={ this.onDeleteButtonClick } />
+        <Deck deck={ deckToRender } onDeleteButtonClick={ this.onDeleteButtonClick } />
       </div>
     );
   }

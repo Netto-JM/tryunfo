@@ -7,6 +7,7 @@ class Form extends Component {
     const {
       cardName,
       cardDescription,
+      nameFilter,
       cardAttr1,
       cardAttr2,
       cardAttr3,
@@ -73,6 +74,14 @@ class Form extends Component {
           onInputChange={ onInputChange }
           testid="image-input"
         />
+        <Input
+          labelFor="nameFilter"
+          labelText="Filtrar por Nome"
+          type="text"
+          value={ nameFilter }
+          onInputChange={ onInputChange }
+          testid="name-filter"
+        />
         <label htmlFor="rarity">
           <span>Raridade</span>
           <select
@@ -118,6 +127,7 @@ class Form extends Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
+  nameFilter: PropTypes.string.isRequired,
   cardAttr1: PropTypes.string.isRequired,
   cardAttr2: PropTypes.string.isRequired,
   cardAttr3: PropTypes.string.isRequired,
