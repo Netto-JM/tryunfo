@@ -16,6 +16,7 @@ class Form extends Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
+      trunfoFilter,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
@@ -81,6 +82,7 @@ class Form extends Component {
           type="text"
           value={ nameFilter }
           onInputChange={ onInputChange }
+          isDisabled={ trunfoFilter }
           testid="name-filter"
         />
         <label htmlFor="rarity">
@@ -104,6 +106,7 @@ class Form extends Component {
             id="rarityFilter"
             value={ rarityFilter }
             onChange={ onInputChange }
+            disabled={ trunfoFilter }
             data-testid="rare-filter"
           >
             <option value="todas">Todas</option>
@@ -152,6 +155,7 @@ Form.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   hasTrunfo: PropTypes.bool.isRequired,
+  trunfoFilter: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,

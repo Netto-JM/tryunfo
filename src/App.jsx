@@ -18,6 +18,7 @@ class App extends React.Component {
       rarity: 'normal',
       trunfo: false,
       hasTrunfo: false,
+      trunfoFilter: false,
       isSaveButtonDisabled: true,
       deck: [],
       filteredDeck: [],
@@ -35,6 +36,9 @@ class App extends React.Component {
 
   filterDeck = () => {
     this.setState((prevState) => {
+      if (prevState.trunfoFilter) {
+        // some logic
+      }
       const noFilter = prevState.rarityFilter === 'todas';
       const rarityFilter = (card) => noFilter || card.rarity === prevState.rarityFilter;
       let filteredDeck = prevState.deck.filter(rarityFilter);
@@ -165,6 +169,7 @@ class App extends React.Component {
       isSaveButtonDisabled,
       // deck,
       filteredDeck,
+      trunfoFilter,
     } = this.state;
 
     // const deckToRender = this.isFilteredDeck() ? filteredDeck : deck;
@@ -185,6 +190,7 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
           hasTrunfo={ hasTrunfo }
+          trunfoFilter={ trunfoFilter }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
