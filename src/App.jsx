@@ -175,12 +175,9 @@ class App extends React.Component {
       trunfo,
       hasTrunfo,
       isSaveButtonDisabled,
-      // deck,
       filteredDeck,
       trunfoFilter,
     } = this.state;
-
-    // const deckToRender = this.isFilteredDeck() ? filteredDeck : deck;
 
     return (
       <div>
