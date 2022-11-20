@@ -7,8 +7,6 @@ class Form extends Component {
     const {
       cardName,
       cardDescription,
-      nameFilter,
-      rarityFilter,
       cardAttr1,
       cardAttr2,
       cardAttr3,
@@ -16,7 +14,6 @@ class Form extends Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
-      trunfoFilter,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
@@ -76,15 +73,6 @@ class Form extends Component {
           onInputChange={ onInputChange }
           testid="image-input"
         />
-        <Input
-          labelFor="nameFilter"
-          labelText="Filtrar por Nome"
-          type="text"
-          value={ nameFilter }
-          onInputChange={ onInputChange }
-          isDisabled={ trunfoFilter }
-          testid="name-filter"
-        />
         <label htmlFor="rarity">
           <span>Raridade</span>
           <select
@@ -94,22 +82,6 @@ class Form extends Component {
             onChange={ onInputChange }
             data-testid="rare-input"
           >
-            <option value="normal">Normal</option>
-            <option value="raro">Raro</option>
-            <option value="muito raro">Muito Raro</option>
-          </select>
-        </label>
-        <label htmlFor="rarityFilter">
-          <span>Filtrar por Raridade</span>
-          <select
-            name="rarityFilter"
-            id="rarityFilter"
-            value={ rarityFilter }
-            onChange={ onInputChange }
-            disabled={ trunfoFilter }
-            data-testid="rare-filter"
-          >
-            <option value="todas">Todas</option>
             <option value="normal">Normal</option>
             <option value="raro">Raro</option>
             <option value="muito raro">Muito Raro</option>
@@ -146,8 +118,6 @@ class Form extends Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  nameFilter: PropTypes.string.isRequired,
-  rarityFilter: PropTypes.string.isRequired,
   cardAttr1: PropTypes.string.isRequired,
   cardAttr2: PropTypes.string.isRequired,
   cardAttr3: PropTypes.string.isRequired,
@@ -155,7 +125,6 @@ Form.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   hasTrunfo: PropTypes.bool.isRequired,
-  trunfoFilter: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
