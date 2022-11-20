@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Deck from './components/Deck';
+import Filters from './components/Filters';
 import Form from './components/Form';
 
 class App extends React.Component {
@@ -22,6 +23,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       deck: [],
       filteredDeck: [],
+      usingFilter: false,
     };
   }
 
@@ -37,7 +39,8 @@ class App extends React.Component {
   filterDeck = () => {
     this.setState((prevState) => {
       if (prevState.trunfoFilter) {
-        // some logic
+        const filteredDeck = prevState.deck.filter((card) => card.trunfo);
+        return { filteredDeck };
       }
       const noFilter = prevState.rarityFilter === 'todas';
       const rarityFilter = (card) => noFilter || card.rarity === prevState.rarityFilter;
@@ -51,7 +54,6 @@ class App extends React.Component {
   };
 
   validateForm = () => {
-    console.log('validateForm');
     const {
       name,
       description,
@@ -66,17 +68,24 @@ class App extends React.Component {
     this.setState({
       isSaveButtonDisabled: !(isValidForm),
     });
-    this.filterDeck();
   };
 
-  onInputChange = ({ target }) => {
+  stateChangeHandler = () => {
+    const { usingFilter } = this.state;
+    if (usingFilter) {
+      this.filterDeck();
+      this.setState({ usingFilter: false });
+    } else this.validateForm();
+  };
+
+  changeHandler = ({ target }) => {
     const { name, type, checked } = target;
     const value = (type === 'checkbox') ? checked : target.value;
     this.setState(
       {
         [name]: value,
       },
-      this.validateForm,
+      this.stateChangeHandler,
     );
   };
 
@@ -148,10 +157,9 @@ class App extends React.Component {
     this.filterDeck();
   };
 
-  // isFilteredDeck = () => {
-  //   const { nameFilter, rarityFilter } = this.state;
-  //   return nameFilter || rarityFilter !== 'todas';
-  // };
+  filterHandler = () => {
+    this.setState({ usingFilter: true });
+  };
 
   render() {
     const {
@@ -179,10 +187,8 @@ class App extends React.Component {
         <h1>Tryunfo</h1>
         <Form
           cardName={ name }
-          onInputChange={ this.onInputChange }
+          onInputChange={ this.changeHandler }
           cardDescription={ description }
-          nameFilter={ nameFilter }
-          rarityFilter={ rarityFilter }
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
@@ -190,9 +196,15 @@ class App extends React.Component {
           cardRare={ rarity }
           cardTrunfo={ trunfo }
           hasTrunfo={ hasTrunfo }
-          trunfoFilter={ trunfoFilter }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }
+        />
+        <Filters
+          onInputChange={ this.changeHandler }
+          onUsingFilter={ this.filterHandler }
+          trunfoFilter={ trunfoFilter }
+          nameFilter={ nameFilter }
+          rarityFilter={ rarityFilter }
         />
         <Card
           cardName={ name }
